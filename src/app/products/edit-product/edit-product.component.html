@@ -1,0 +1,49 @@
+<div class="container py-5" style="max-width: 600px;">
+
+    <h3 class="mb-3">
+        <span *ngIf="isAdd">Add product</span>
+        <span *ngIf="!isAdd">Edit product</span>
+    </h3>
+
+    <div class="card">
+        <div class="card-body">
+
+            <form [formGroup]="form" (ngSubmit)="onSubmit()" class="row g-3 needs-validation" novalidate>
+
+                <div class="col-12">
+                    <label class="form-label">Name</label>
+                    <input 
+                        type="text" 
+                        formControlName="name" 
+                        class="form-control" 
+                        [ngClass]="{ 'is-invalid': submitted && f['name']['errors'] }"
+                        required>
+                    <div *ngIf="submitted && f['name']['errors']" class="invalid-feedback">
+                        <div *ngIf="f['name']['errors']['required']">Name is required</div>
+                    </div>
+                </div>
+
+
+                <div class="col-12">
+                    <button 
+                        type="submit" 
+                        class="btn btn-outline-primary" 
+                        [disabled]="loading">
+                        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                        Save
+                    </button>
+                    <button 
+                        style="margin-left: 10px;"
+                        type="button" 
+                        (click)="previousState()" 
+                        class="btn btn-outline-secondary">
+                        Back
+                    </button>
+                    <button #reset hidden type="reset">reset</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+</div>
