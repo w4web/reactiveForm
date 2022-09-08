@@ -9,6 +9,9 @@ import { ToastrModule } from 'ngx-toastr';
 const routes: Routes = [
   { 
     path: '', loadChildren: () => import('./products/products.module').then(m => m.ProductsModule)
+  },
+  { 
+    path: 'employees', loadChildren: () => import('./employees/employees.module').then(m => m.EmployeesModule)
   }
 ];
 
