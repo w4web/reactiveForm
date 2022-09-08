@@ -24,6 +24,7 @@ export class EditEmployeeComponent implements OnInit {
     private empService: EmployeeService, 
     private msgService: MsgService,
     private route: ActivatedRoute, 
+    private router: Router, 
     private formBuilder: FormBuilder
   ) { }
 
@@ -75,12 +76,13 @@ export class EditEmployeeComponent implements OnInit {
   }
 
   addEmployee() {
-    console.log("this.form.value", this.form.value);
     this.empService.create(this.form.value);
+    this.router.navigate(['employees']);
   }
 
   editEmployee() {
     this.empService.update(this.id, this.form.value);
+    this.router.navigate(['employees']);
   }
 
   resetFields(): void {
