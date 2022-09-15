@@ -16,10 +16,13 @@
                         type="text" 
                         formControlName="name" 
                         class="form-control" 
-                        [ngClass]="{ 'is-invalid': submitted && f['name']['errors'] }"
+                        [ngClass]="{ 'is-invalid': f['name']['invalid'] && (f['name']['dirty'] || f['name']['touched']) }"
                         required>
-                    <div *ngIf="submitted && f['name']['errors']" class="invalid-feedback">
+                    <div *ngIf="f['name']['errors'] && (f['name']['dirty'] || f['name']['touched'])" class="invalid-feedback">
                         <div *ngIf="f['name']['errors']['required']">Name is required</div>
+                        <div *ngIf="f['name']['errors']['minlength']">Name Must be at least 4 charecters long!</div>
+                        <div *ngIf="f['name']['errors']['pattern']">Name pattern is not valid</div>
+                        <div *ngIf="f['name']['errors']['nameNotAllowed']">This name is NOT allowed</div>
                     </div>
                 </div>
 
@@ -28,8 +31,7 @@
                     <button 
                         type="submit" 
                         class="btn btn-outline-primary" 
-                        [disabled]="loading">
-                        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                        [disabled]="!form.valid">
                         Save
                     </button>
                     <button 

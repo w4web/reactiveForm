@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MsgService } from 'src/app/shared/services/msg.service';
 import { Product } from 'src/app/shared/models/product.model';
+import { nameValidator } from 'src/app/shared/validators/common.validator';
 
 @Component({
   selector: 'app-edit-product',
@@ -15,7 +16,6 @@ export class EditProductComponent implements OnInit {
   id!: string;
   product!: Product;
   isAdd = true;
-  loading = false;
   form!: FormGroup;
   submitted = false;
 
@@ -35,7 +35,12 @@ export class EditProductComponent implements OnInit {
     this.form = this.formBuilder.group({
       id: [],
       image: ['', [Validators.required]],
-      name: ['', [Validators.required]],
+      name: ['', [
+        Validators.required, 
+        Validators.minLength(4), 
+        Validators.pattern("^[a-zA-Z]+$"),
+        nameValidator(/jayesh/i) // Parameters could be omitted
+      ]],
       price: ['', [Validators.required]],
       category: ['', [Validators.required]],
       subCategory: ['', [Validators.required]],
@@ -72,8 +77,6 @@ export class EditProductComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
-
-    this.loading = true;
     
     if( this.id !== undefined ) {
       this.editProduct();
@@ -93,7 +96,6 @@ export class EditProductComponent implements OnInit {
       },
       error: (err: any) => {
         this.msgService.errorHandle(err);
-        this.loading = false;
       }
     });
   }
@@ -107,7 +109,6 @@ export class EditProductComponent implements OnInit {
       },
       error: (err: any) => {
         this.msgService.errorHandle(err);
-        this.loading = false;
       }
     });
   }

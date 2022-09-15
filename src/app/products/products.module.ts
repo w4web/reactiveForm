@@ -5,6 +5,7 @@ import { ProductsComponent } from './products.component';
 import { EditProductComponent } from './edit-product/edit-product.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AlertComponent } from '../shared/components/alert/alert.component';
 
 const routes: Routes = [
   { path: '', component: ProductsComponent },
@@ -15,7 +16,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [ 
     ProductsComponent, 
-    EditProductComponent
+    EditProductComponent,
+    AlertComponent
   ],
   imports: [
     CommonModule,
