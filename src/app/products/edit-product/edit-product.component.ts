@@ -4,7 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MsgService } from 'src/app/shared/services/msg.service';
 import { Product } from 'src/app/shared/models/product.model';
-import { MatchValidator, nameValidator } from 'src/app/shared/validators/common.validator';
+import { nameValidator } from 'src/app/shared/validators/common.validator';
+import Validation from 'src/app/shared/validators/validation';
 
 @Component({
   selector: 'app-edit-product',
@@ -50,7 +51,7 @@ export class EditProductComponent implements OnInit {
       confirmPassword: ['', [Validators.required]], // Not in model
       acceptTerms: [false, Validators.requiredTrue] // Not in model
     }, {
-      validator: MatchValidator('password', 'confirmPassword')
+      validators: [Validation.match('password', 'confirmPassword')]
     });
 
     if ( this.id ) {
