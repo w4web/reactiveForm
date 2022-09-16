@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MsgService } from 'src/app/shared/services/msg.service';
 import { Product } from 'src/app/shared/models/product.model';
-import { nameValidator } from 'src/app/shared/validators/common.validator';
+import { MatchValidator, nameValidator } from 'src/app/shared/validators/common.validator';
 
 @Component({
   selector: 'app-edit-product',
@@ -14,10 +14,10 @@ import { nameValidator } from 'src/app/shared/validators/common.validator';
 export class EditProductComponent implements OnInit {
 
   id!: string;
-  product!: Product;
+  // product!: Product;
+  product!: any;
   isAdd = true;
   form!: FormGroup;
-  submitted = false;
 
   @ViewChild('reset', { static: false }) reset?: ElementRef<HTMLElement>;
 
@@ -44,7 +44,12 @@ export class EditProductComponent implements OnInit {
       price: ['', [Validators.required]],
       category: ['', [Validators.required]],
       subCategory: ['', [Validators.required]],
-      description: ['', [Validators.required]]
+      description: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]], // Not in model
+      password: ['', [Validators.required]], // Not in model
+      confirmPassword: ['', [Validators.required]] // Not in model
+    }, {
+      validator: MatchValidator('password', 'confirmPassword')
     });
 
     if ( this.id ) {
@@ -62,6 +67,10 @@ export class EditProductComponent implements OnInit {
 
   }
 
+  onChangeImage(imageUrl: any) {
+    this.form.get("image")?.setValue(imageUrl);
+  }
+
   previousState(): void {
     window.history.back();
   }
@@ -71,17 +80,13 @@ export class EditProductComponent implements OnInit {
   get f() { return this.form.controls; }
 
   onSubmit() {
-
-    this.submitted = true;
-
-    if (this.form.invalid) {
-      return;
-    }
     
     if( this.id !== undefined ) {
-      this.editProduct();
+      // this.editProduct();
+      console.log("this.form.value", this.form.value);
     } else {
-      this.addProduct();
+      // this.addProduct();
+      console.log("this.form.value", this.form.value);
     }
 
   }

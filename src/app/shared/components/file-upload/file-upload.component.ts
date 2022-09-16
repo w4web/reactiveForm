@@ -1,4 +1,4 @@
-import { AfterContentChecked, Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { AlertService } from '../alert/alert.service';
@@ -9,12 +9,15 @@ import { AlertService } from '../alert/alert.service';
   styleUrls: ['./file-upload.component.scss']
 })
 
-export class fileUploadComponent implements OnInit, AfterContentChecked {
+export class fileUploadComponent implements OnInit, OnChanges {
 
   private apiUrl = environment.baseUrl;
 
   imgSelected = false;
   imageSrc = '../../../assets/images/upload.png';
+
+  @Input() imageUrl: any;
+  @Output() changeUrl = new EventEmitter<any>();
 
   file: any;
 
@@ -25,15 +28,15 @@ export class fileUploadComponent implements OnInit, AfterContentChecked {
 
   ngOnInit(): void {}
 
-  ngAfterContentChecked(): void {
+  ngOnChanges(): void {
 
     this.checkToLoad();
 
   }
 
   checkToLoad () {
-    if( this.form && this.form.get('image')?.value ) {
-      this.imageSrc = this.form.get('image')?.value;
+    if( this.imageUrl ) {
+      this.imageSrc = this.imageUrl;
     }
   }
 
@@ -49,7 +52,7 @@ export class fileUploadComponent implements OnInit, AfterContentChecked {
           this.file = event.target.files[0];
         };
       } else {
-        this.alertService.alert({type: 'error', message: 'image should be less than 2mb!'});
+        this.alertService.alert({type: 'danger', message: 'image should be less than 2mb!'});
       }
     }
   }
@@ -60,7 +63,7 @@ export class fileUploadComponent implements OnInit, AfterContentChecked {
 
     this.http.post<any>(`${this.apiUrl}/uploadFile`, formData).subscribe(res => {
       this.imageSrc = this.apiUrl+'/'+res.file;
-      this.formControl.setValue(this.apiUrl+'/'+res.file);
+      this.changeUrl.next(this.apiUrl+'/'+res.file);
       this.alertService.alert({type: 'success', message: 'Image uploaded successfully..'});
       this.imgSelected = false;
     });
@@ -68,7 +71,7 @@ export class fileUploadComponent implements OnInit, AfterContentChecked {
 
   onCancel(): void {
     this.imageSrc = '../../../assets/images/upload.png';
-    this.formControl.setValue('');
+    this.changeUrl.next('');
     this.imgSelected = false;
   }
 

@@ -26,12 +26,65 @@
                     </div>
                 </div>
 
+                <div class="col-12">
+                    <label class="form-label">File upload</label>
+                    <file-upload (changeUrl)="onChangeImage($event)" [imageUrl]="f['image']['value']"></file-upload>
+                </div>
 
                 <div class="col-12">
-                    <button 
+                    <label class="form-label">Email</label>
+                    <input 
+                        type="email" 
+                        formControlName="email" 
+                        class="form-control" 
+                        [ngClass]="{ 'is-invalid': f['email']['invalid'] && (f['email']['dirty'] || f['email']['touched']) }"
+                        required>
+                    <div *ngIf="f['email']['errors'] && (f['email']['dirty'] || f['email']['touched'])" class="invalid-feedback">
+                        <div *ngIf="f['email']['errors']['required']">Email is required</div>
+                        <div *ngIf="f['email']['errors']['email']">Email is not valid!</div>
+                    </div>
+                </div>
+
+                <!-- =================== -->
+
+                <div class="col-12">
+                    <label class="form-label">Password</label>
+                    <input 
+                        type="password" 
+                        formControlName="password" 
+                        class="form-control" 
+                        [ngClass]="{ 'is-invalid': f['password']['invalid'] && (f['password']['dirty'] || f['password']['touched']) }"
+                        required>
+                    <div *ngIf="f['password']['errors'] && (f['password']['dirty'] || f['password']['touched'])" class="invalid-feedback">
+                        <div *ngIf="f['password']['errors']['required']">password is required</div>
+                    </div>
+                </div>
+
+                <div class="col-12">
+                    <label class="form-label">Confirm password</label>
+                    <input 
+                        type="password" 
+                        formControlName="confirmPassword" 
+                        class="form-control" 
+                        [ngClass]="{ 'is-invalid': f['confirmPassword']['invalid'] && (f['confirmPassword']['dirty'] || f['confirmPassword']['touched']) }"
+                        required>
+                    <div *ngIf="f['confirmPassword']['errors'] && (f['confirmPassword']['dirty'] || f['confirmPassword']['touched'])" class="invalid-feedback">
+                        <div *ngIf="f['confirmPassword']['errors']['required']">Confirm password is required</div>
+                        <div *ngIf="f['confirmPassword']['errors']['mismatch']">Password does not match</div>
+                    </div>
+                </div>
+
+
+                <div class="col-12">
+                    <!-- <button 
                         type="submit" 
                         class="btn btn-outline-primary" 
                         [disabled]="!form.valid">
+                        Save
+                    </button> -->
+                    <button 
+                        type="submit" 
+                        class="btn btn-outline-primary">
                         Save
                     </button>
                     <button 
