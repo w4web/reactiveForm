@@ -47,7 +47,8 @@ export class EditProductComponent implements OnInit {
       description: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]], // Not in model
       password: ['', [Validators.required]], // Not in model
-      confirmPassword: ['', [Validators.required]] // Not in model
+      confirmPassword: ['', [Validators.required]], // Not in model
+      acceptTerms: [false, Validators.requiredTrue] // Not in model
     }, {
       validator: MatchValidator('password', 'confirmPassword')
     });
