@@ -1,0 +1,7 @@
+<div class="mt-5 mx-auto" style="width: 500px">
+  <h4>{{title | substr:2:15}}</h4>
+  <br>
+  <ul>
+    <li *ngFor="let hero of heros">{{hero | substr:0:8}}</li>
+  </ul>
+</div>
