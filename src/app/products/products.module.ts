@@ -7,6 +7,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AlertComponent } from '../shared/components/alert/alert.component';
 import { fileUploadComponent } from '../shared/components/file-upload/file-upload.component';
+import { HighlightDirective } from '../shared/directives/highlight.directive';
 
 const routes: Routes = [
   { path: '', component: ProductsComponent },
@@ -19,7 +20,8 @@ const routes: Routes = [
     ProductsComponent, 
     EditProductComponent,
     AlertComponent,
-    fileUploadComponent
+    fileUploadComponent,
+    HighlightDirective
   ],
   imports: [
     CommonModule,

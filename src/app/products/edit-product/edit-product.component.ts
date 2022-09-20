@@ -13,6 +13,8 @@ import { mustMatch, nameValidator } from 'src/app/shared/validators/common.valid
 
 export class EditProductComponent implements OnInit {
 
+  color = "yellow";
+
   id!: string;
   // product!: Product;
   product!: any;
