@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { ProductService } from '../product.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -126,6 +126,16 @@ export class EditProductComponent implements OnInit {
       const el: HTMLElement = this.reset.nativeElement;
       el.click();
     }
+  }
+
+  // @HostListener
+
+  @HostListener('click') myClick() {
+    console.log("Click on whole component..");
+  }
+
+  @HostListener("window:scroll", ['$event']) myScroll() {
+    console.log("Windows srolling..");
   }
 
 }
