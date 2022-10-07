@@ -11,6 +11,8 @@ import { AlertService } from '../alert/alert.service';
 
 export class fileUploadComponent implements OnInit, OnChanges {
 
+  // File upload with base64 available on "Fuel2endure admin" branch name "fileUploadDynamic"
+
   private apiUrl = environment.baseUrl;
 
   imgSelected = false;
