@@ -17,6 +17,9 @@ const routes: Routes = [
   },
   { 
     path: 'employees', loadChildren: () => import('./employees/employees.module').then(m => m.EmployeesModule)
+  },
+  { 
+    path: 'mat-crud', loadChildren: () => import('./mat-crud/mat-crud.module').then(m => m.MatCrudModule)
   }
 ];
 
