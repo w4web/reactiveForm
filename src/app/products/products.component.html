@@ -1,7 +1,7 @@
 <div class="container py-5">
 
     <div class="text-end mb-3">
-        <button class="btn btn-outline-secondary" routerLink="/add">Add new</button>
+        <button class="btn btn-outline-secondary" routerLink="/products/add">Add new</button>
     </div>
     <div class="card">
         <div class="card-body">
@@ -33,7 +33,7 @@
                             <button 
                                 style="margin-right: 10px;"
                                 class="btn btn-outline-secondary" 
-                                [routerLink]="['/edit', product._id]">
+                                [routerLink]="['/products/edit', product._id]">
                                 <i class="fa fa-pencil"></i>
                             </button>
                             <button 
