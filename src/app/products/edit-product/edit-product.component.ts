@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ProductService } from '../product.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
 import { MsgService } from 'src/app/shared/services/msg.service';
 import { Product } from 'src/app/shared/models/product.model';
 import { mustMatch, nameValidator } from 'src/app/shared/validators/common.validator';
@@ -48,7 +48,12 @@ export class EditProductComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]], // Not in model
       password: ['', [Validators.required]], // Not in model
       confirmPassword: ['', [Validators.required]], // Not in model
-      acceptTerms: [false, Validators.requiredTrue] // Not in model
+
+      skills: this.formBuilder.array([
+        this.formBuilder.control('', [Validators.required])
+      ]),
+
+      acceptTerms: [true, Validators.requiredTrue] // Not in model
     }, {
       validators: [mustMatch('password', 'confirmPassword')]
     });
@@ -76,9 +81,20 @@ export class EditProductComponent implements OnInit {
     window.history.back();
   }
 
-  // convenience getter for easy access to form fields
+  // Convenience getter for easy access to form fields
 
   get f() { return this.form.controls; }
+
+  get skills() {
+    return this.form.get('skills') as FormArray;
+  }
+
+  // Getter ends..
+
+  addSkill() {
+    this.skills.push(this.formBuilder.control('', [Validators.required]));
+  }
+
 
   onSubmit() {
     
