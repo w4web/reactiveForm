@@ -1,0 +1,64 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+// Theme 1 (Light)
+
+$theme1-primary: mat.define-palette(mat.$indigo-palette);
+$theme1-accent: mat.define-palette(mat.$pink-palette);
+$theme1-warn: mat.define-palette(mat.$red-palette);
+
+$theme1: mat.define-light-theme((
+ color: (
+   primary: $theme1-primary,
+   accent: $theme1-accent,
+   warn: $theme1-warn,
+ )
+));
+
+// Theme 2 (Dark)
+
+$theme2-primary: mat.define-palette(mat.$pink-palette);
+$theme2-accent: mat.define-palette(mat.$blue-grey-palette);
+
+$theme2: mat.define-dark-theme((
+ color: (
+   primary: $theme2-primary,
+   accent: $theme2-accent,
+ )
+));
+
+// Theme 3 (Light)
+
+$theme3-primary: mat.define-palette(mat.$green-palette);
+$theme3-accent: mat.define-palette(mat.$lime-palette);
+
+$theme3: mat.define-light-theme((
+ color: (
+   primary: $theme3-primary,
+   accent: $theme3-accent,
+ )
+));
+
+
+
+// ################################
+
+// Theme 1 (default)
+
+@include mat.core-color($theme1);
+@include mat.button-color($theme1);
+
+// Theme 2
+
+.theme2 {
+  @include mat.core-theme($theme2);
+  @include mat.button-theme($theme2);
+}
+
+// Theme 3
+
+.theme3 {
+  @include mat.core-theme($theme3);
+  @include mat.button-theme($theme3);
+}
