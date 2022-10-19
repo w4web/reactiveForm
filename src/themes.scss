@@ -46,19 +46,16 @@ $theme3: mat.define-light-theme((
 
 // Theme 1 (default)
 
-@include mat.core-color($theme1);
-@include mat.button-color($theme1);
+@include mat.all-component-themes($theme1);
 
 // Theme 2
 
 .theme2 {
-  @include mat.core-theme($theme2);
-  @include mat.button-theme($theme2);
+  @include mat.all-component-themes($theme2);
 }
 
 // Theme 3
 
 .theme3 {
-  @include mat.core-theme($theme3);
-  @include mat.button-theme($theme3);
+  @include mat.all-component-themes($theme3);
 }

@@ -33,6 +33,8 @@ export class TodoComponent implements OnInit {
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol', 'actions'];
   dataSource = ELEMENT_DATA;
 
+  theme = '';
+
   constructor(public dialog: MatDialog) { }
 
   ngOnInit(): void {
@@ -48,6 +50,12 @@ export class TodoComponent implements OnInit {
       console.log('The dialog was closed', result);
       // Refrash the page here...
     });
+  }
+
+  // Change theme
+
+  changeTheme(val:string) {
+    this.theme = val;
   }
 
 }
