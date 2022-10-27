@@ -26,7 +26,11 @@ export class TodoService {
   constructor() { }
 
   allTodo(): Observable<any> {
-    return todo;
+    return todo.pipe(map(arr => {
+      return arr.map(obj => {
+        return {...obj, weight: obj.weight*10};
+      });
+    }));
   }
 
 }
